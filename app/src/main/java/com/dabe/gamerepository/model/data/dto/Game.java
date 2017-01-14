@@ -1,63 +1,37 @@
 package com.dabe.gamerepository.model.data.dto;
 
-import android.os.Parcel;
-import android.os.Parcelable;
+import com.dabe.gamerepository.model.data.enums.DataProvideEnum;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by Daniil Belevtsev on 12.01.2017 0:33.
  * Project: GameRepository; Skype: pandamoni1
  */
 
-public class Game extends TypedContent implements Parcelable {
+public class Game {
     public static final String TYPE = "GAME";
 
+    @SerializedName("name")
     private String name;
-    private String picUrl;
-    private Service service;
 
-    public Game(String name, String picUrl) {
-        super(TYPE);
+    @Expose
+    private DataProvideEnum dataProvider;
+
+    public Game(String name, DataProvideEnum dataProvider) {
         this.name = name;
-        this.picUrl = picUrl;
-    }
-
-    protected Game(Parcel in) {
-        super(TYPE);
-        name = in.readString();
-        picUrl = in.readString();
-        service = (Service) in.readValue(Service.class.getClassLoader());
-    }
-
-    public String getPicUrl() {
-        return picUrl;
+        this.dataProvider = dataProvider;
     }
 
     public String getName() {
         return name;
     }
 
-    @SuppressWarnings("unused")
-    public static final Parcelable.Creator<Game> CREATOR = new Parcelable.Creator<Game>() {
-        @Override
-        public Game createFromParcel(Parcel in) {
-            return new Game(in);
-        }
-
-        @Override
-        public Game[] newArray(int size) {
-            return new Game[size];
-        }
-    };
-
-    @Override
-    public int describeContents() {
-        return 0;
+    public DataProvideEnum getDataProvider() {
+        return dataProvider;
     }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(name);
-        dest.writeString(picUrl);
-        dest.writeValue(service);
+    public void setDataProvider(DataProvideEnum dataProvider) {
+        this.dataProvider = dataProvider;
     }
 }

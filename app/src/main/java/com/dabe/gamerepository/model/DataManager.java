@@ -2,7 +2,14 @@ package com.dabe.gamerepository.model;
 
 import com.dabe.gamerepository.app.AppConsts;
 import com.dabe.gamerepository.app.TheApp;
+import com.dabe.gamerepository.model.api.IGDBApi;
 import com.dabe.gamerepository.model.api.ISteamApi;
+import com.dabe.gamerepository.model.data.bo.GameBO;
+import com.dabe.gamerepository.model.data.enums.DataProvideEnum;
+import com.dabe.gamerepository.utils.RxProviderSetter;
+
+import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -21,21 +28,45 @@ public class DataManager implements IDataManager {
     private final Observable.Transformer shedulersTransformer;
 
     @Inject
-    ISteamApi steamApi;
+    protected ISteamApi steamApi;
+
+    @Inject
+    protected IGDBApi igdbApi;
 
     @Inject
     @Named(AppConsts.UI_THREAD)
-    Scheduler uiThread;
+    protected Scheduler uiThread;
 
     @Inject
     @Named(AppConsts.IO_THREAD)
-    Scheduler ioThread;
+    protected Scheduler ioThread;
 
     public DataManager() {
         TheApp.getComponent().inject(this);
         shedulersTransformer = observable -> ((Observable) observable).subscribeOn(ioThread)
                 .observeOn(uiThread)
                 .unsubscribeOn(ioThread);
+    }
+
+    @Override
+    public Observable<List<GameBO>> getGameList(Map<String, String> parameters, DataProvideEnum provider) {
+        switch (provider) {
+            case IGDB:
+                return igdbApi.getGameByName(parameters)
+                        .flatMap(Observable::from)
+                        .map(new RxProviderSetter(provider))
+                        .map(GameBO::new)
+                        .toList()
+                        .compose(applyShedulers());
+            case STEAM:
+                return igdbApi.getGameByName(parameters)
+                        .flatMap(Observable::from)
+                        .map(new RxProviderSetter(provider))
+                        .map(GameBO::new)
+                        .toList()
+                        .compose(applyShedulers());
+        }
+        return null;
     }
 
     @SuppressWarnings("unchecked")

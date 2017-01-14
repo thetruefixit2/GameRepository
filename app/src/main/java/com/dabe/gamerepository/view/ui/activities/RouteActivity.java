@@ -1,6 +1,6 @@
 package com.dabe.gamerepository.view.ui.activities;
 
-import com.dabe.gamerepository.view.ui.fragments.GameListFragment;
+import com.dabe.gamerepository.view.ui.fragments.AddGameFragment;
 
 /**
  * Created by Daniil Belevtsev on 12.01.2017 0:37.
@@ -12,7 +12,7 @@ import com.dabe.gamerepository.view.ui.fragments.GameListFragment;
 public class RouteActivity extends FragmentActivity {
 
     protected void showGameListFragment() {
-        replaceFragment(GameListFragment.newInstance(), false);
+        replaceFragment(AddGameFragment.newInstance(), false);
     }
 
 }

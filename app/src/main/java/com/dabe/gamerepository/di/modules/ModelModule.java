@@ -1,8 +1,9 @@
 package com.dabe.gamerepository.di.modules;
 
 import com.dabe.gamerepository.app.AppConsts;
-import com.dabe.gamerepository.model.api.IGamesDBApi;
+import com.dabe.gamerepository.model.api.IGDBApi;
 import com.dabe.gamerepository.model.api.ISteamApi;
+import com.dabe.gamerepository.utils.IGApiInterceptor;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
@@ -13,7 +14,6 @@ import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
 import rx.Scheduler;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -24,6 +24,7 @@ import rx.schedulers.Schedulers;
  */
 @Module
 public class ModelModule {
+
     @Provides
     @Singleton
     ISteamApi provideSteamApi() {
@@ -38,14 +39,18 @@ public class ModelModule {
 
     @Provides
     @Singleton
-    IGamesDBApi provideGamesDBApi() {
-        OkHttpClient client = new OkHttpClient();
+    IGDBApi provideIGDBApi() {
+        OkHttpClient client = new OkHttpClient.Builder()
+                .addInterceptor(new IGApiInterceptor())
+                .build();
+
         Retrofit.Builder builder = new Retrofit.Builder()
-                .baseUrl(AppConsts.STEAM_BASE_URL)
-                .addConverterFactory(SimpleXmlConverterFactory.create())
+                .baseUrl(AppConsts.IGDB_BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create());
         builder.client(client);
-        return builder.build().create(IGamesDBApi.class);
+
+        return builder.build().create(IGDBApi.class);
     }
 
     @Provides

@@ -6,11 +6,13 @@ package com.dabe.gamerepository.app;
  */
 
 public class AppConsts {
-    public static final String STEAM_BASE_URL = "url";
+    public static final String STEAM_BASE_URL = "http://api.steampowered.com";
+    public static final String IGDB_BASE_URL = "https://igdbcom-internet-game-database-v1.p.mashape.com";
     public static final String UI_THREAD = "ui_thread";
     public static final String IO_THREAD = "io_thread";
 
-    public static final String STEAM_API = "steam_api";
+
+
     public static final String GSON_SERIALIZER = "gson_serialized";
     public static final String GSON_DESERIALIZER = "gson_deserialized";
 

@@ -1,6 +1,6 @@
 package com.dabe.gamerepository.di.modules;
 
-import com.dabe.gamerepository.presenter.presenters.GameListPresenter;
+import com.dabe.gamerepository.presenter.presenters.AddGamePresenter;
 import com.dabe.gamerepository.presenter.presenters.MainPresenter;
 
 import dagger.Module;
@@ -20,8 +20,8 @@ public class ViewModule {
     }
 
     @Provides
-    GameListPresenter provideGameListPresenter() {
-        return new GameListPresenter();
+    AddGamePresenter provideGameListPresenter() {
+        return new AddGamePresenter();
     }
 
 }
