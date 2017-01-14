@@ -10,18 +10,7 @@ import android.os.Parcelable;
 
 public class Service extends TypedContent implements Parcelable {
     public static final String TYPE = "Service";
-    @SuppressWarnings("unused")
-    public static final Parcelable.Creator<Service> CREATOR = new Parcelable.Creator<Service>() {
-        @Override
-        public Service createFromParcel(Parcel in) {
-            return new Service(in);
-        }
 
-        @Override
-        public Service[] newArray(int size) {
-            return new Service[size];
-        }
-    };
     private String name;
     private String url;
 
@@ -44,6 +33,19 @@ public class Service extends TypedContent implements Parcelable {
     public String getName() {
         return name;
     }
+
+    @SuppressWarnings("unused")
+    public static final Parcelable.Creator<Service> CREATOR = new Parcelable.Creator<Service>() {
+        @Override
+        public Service createFromParcel(Parcel in) {
+            return new Service(in);
+        }
+
+        @Override
+        public Service[] newArray(int size) {
+            return new Service[size];
+        }
+    };
 
     @Override
     public int describeContents() {

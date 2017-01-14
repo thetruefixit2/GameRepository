@@ -10,18 +10,7 @@ import android.os.Parcelable;
 
 public class TypedContent implements Parcelable {
 
-    @SuppressWarnings("unused")
-    public static final Parcelable.Creator<TypedContent> CREATOR = new Parcelable.Creator<TypedContent>() {
-        @Override
-        public TypedContent createFromParcel(Parcel in) {
-            return new TypedContent(in);
-        }
 
-        @Override
-        public TypedContent[] newArray(int size) {
-            return new TypedContent[size];
-        }
-    };
     private String type;
 
     public TypedContent(String type) {
@@ -51,6 +40,19 @@ public class TypedContent implements Parcelable {
     public int hashCode() {
         return type.hashCode();
     }
+
+    @SuppressWarnings("unused")
+    public static final Parcelable.Creator<TypedContent> CREATOR = new Parcelable.Creator<TypedContent>() {
+        @Override
+        public TypedContent createFromParcel(Parcel in) {
+            return new TypedContent(in);
+        }
+
+        @Override
+        public TypedContent[] newArray(int size) {
+            return new TypedContent[size];
+        }
+    };
 
     @Override
     public int describeContents() {

@@ -10,18 +10,7 @@ import android.os.Parcelable;
 
 public class Game extends TypedContent implements Parcelable {
     public static final String TYPE = "GAME";
-    @SuppressWarnings("unused")
-    public static final Parcelable.Creator<Game> CREATOR = new Parcelable.Creator<Game>() {
-        @Override
-        public Game createFromParcel(Parcel in) {
-            return new Game(in);
-        }
 
-        @Override
-        public Game[] newArray(int size) {
-            return new Game[size];
-        }
-    };
     private String name;
     private String picUrl;
     private Service service;
@@ -46,6 +35,19 @@ public class Game extends TypedContent implements Parcelable {
     public String getName() {
         return name;
     }
+
+    @SuppressWarnings("unused")
+    public static final Parcelable.Creator<Game> CREATOR = new Parcelable.Creator<Game>() {
+        @Override
+        public Game createFromParcel(Parcel in) {
+            return new Game(in);
+        }
+
+        @Override
+        public Game[] newArray(int size) {
+            return new Game[size];
+        }
+    };
 
     @Override
     public int describeContents() {
