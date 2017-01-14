@@ -2,10 +2,12 @@ package com.dabe.gamerepository.model;
 
 import com.dabe.gamerepository.app.AppConsts;
 import com.dabe.gamerepository.app.TheApp;
+import com.dabe.gamerepository.model.api.ISteamApi;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import rx.Observable;
 import rx.Scheduler;
 
 
@@ -15,6 +17,11 @@ import rx.Scheduler;
  */
 
 public class DataManager implements IDataManager {
+
+    private final Observable.Transformer shedulersTransformer;
+
+    @Inject
+    ISteamApi steamApi;
 
     @Inject
     @Named(AppConsts.UI_THREAD)
@@ -26,5 +33,13 @@ public class DataManager implements IDataManager {
 
     public DataManager() {
         TheApp.getComponent().inject(this);
+        shedulersTransformer = observable -> ((Observable) observable).subscribeOn(ioThread)
+                .observeOn(uiThread)
+                .unsubscribeOn(ioThread);
+    }
+
+    @SuppressWarnings("unchecked")
+    private <T> Observable.Transformer<T, T> applyShedulers() {
+        return (Observable.Transformer<T, T>) shedulersTransformer;
     }
 }
