@@ -32,7 +32,6 @@ public class GameListFragment extends BaseFragment {
 
     @Override
     public void onInitBundle() {
-
     }
 
     @Override

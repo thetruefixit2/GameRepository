@@ -52,7 +52,7 @@ public class FragmentActivity extends AppCompatActivity {
 
     /**
      * Container setter for fragment control.
-     * All activities should set container in onCreate
+     * All activities should set container in onCreate after layout
      *
      * @param container
      */
