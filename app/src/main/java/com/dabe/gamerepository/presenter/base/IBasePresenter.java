@@ -6,4 +6,5 @@ package com.dabe.gamerepository.presenter.base;
  */
 
 public interface IBasePresenter {
+    void onStop();
 }

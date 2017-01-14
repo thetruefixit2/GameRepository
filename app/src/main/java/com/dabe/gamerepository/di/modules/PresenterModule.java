@@ -7,6 +7,7 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import rx.subscriptions.CompositeSubscription;
 
 /**
  * Created by Daniil Belevtsev on 12.01.2017 0:27.
@@ -22,4 +23,8 @@ public class PresenterModule {
         return new DataManager();
     }
 
+    @Provides
+    CompositeSubscription provideCompositeSubscription() {
+        return new CompositeSubscription();
+    }
 }
