@@ -10,6 +10,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:ems="10"
+        android:text="76561197960434622"
         android:gravity="center"
         android:inputType="textPersonName"
         android:hint="@string/default_game_name"/>

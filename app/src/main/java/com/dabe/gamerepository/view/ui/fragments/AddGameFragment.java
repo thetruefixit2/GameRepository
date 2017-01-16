@@ -60,7 +60,7 @@ public class AddGameFragment extends BaseFragment implements IAddGameView {
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_game_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_addgame_list, container, false);
         ButterKnife.bind(this, view);
         return view;
     }
@@ -77,13 +77,16 @@ public class AddGameFragment extends BaseFragment implements IAddGameView {
 
     @OnClick(R.id.btnNext)
     public void onClick() {
-        loadData(etGameName.getText().toString());
+        loadUserGames(etGameName.getText().toString());
     }
 
-    public void loadData(String gameName) {
-        presenter.loadData(gameName, DataProvideEnum.IGDB);
+    public void findGame(String gameName) {
+        presenter.findGame(gameName, DataProvideEnum.IGDB);
     }
 
+    public void loadUserGames(String steamID) {
+        presenter.loadUserGame(steamID);
+    }
     ///////////////////////////////////////////////////////////////////////////
     // CALLBACK ZONE
     ///////////////////////////////////////////////////////////////////////////

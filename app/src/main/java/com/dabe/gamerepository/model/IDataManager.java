@@ -15,4 +15,5 @@ import rx.Observable;
 
 public interface IDataManager {
     Observable<List<GameBO>> getGameList(Map<String, String> parameters, DataProvideEnum provider);
+    Observable<List<GameBO>> getUserGameList(Map<String, String> parameters, DataProvideEnum provider);
 }

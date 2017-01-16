@@ -7,7 +7,7 @@ package com.dabe.gamerepository.model.data.finals;
 //fields=id,name,summary,cover,first_release_date,videos&limit=5&offset=0&order=release_dates.date%3Adesc&search=fifa
 public class IGConsts {
     public static final String KEY_HEADER_NAME = "X-Mashape-Key";
-    public static final String TEMP_KEY = "vptg8Wskqqmshut42YtKnGS9u59Op1Z6vcXjsnGCGfTGeelvbY";
+    public static final String TEMP_KEY = "vptg8Wskqqmshut42YtKnGS9u59Op1Z6vcXjsnGCGfTGeelvbY"; // TODO: 15.01.2017 move to @DataManager
     public static final String ID_FIELD = "id";
     public static final String NAME_FIELD = "name";
     public static final String SUMMARY_FIELD = "summary";

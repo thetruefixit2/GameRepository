@@ -10,16 +10,19 @@ import com.dabe.gamerepository.view.interfaces.IMainView;
 
 import javax.inject.Inject;
 
-public class MainActivity extends RouteActivity implements IMainView {
+import butterknife.ButterKnife;
+
+public class MainActivity extends LockActivity implements IMainView {
 
     @Inject
     MainPresenter presenter;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         TheApp.getComponent().inject(this);
-        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
+        super.onCreate(savedInstanceState);
         setContainer(R.id.container);
         presenter.init(this);
         initUI();

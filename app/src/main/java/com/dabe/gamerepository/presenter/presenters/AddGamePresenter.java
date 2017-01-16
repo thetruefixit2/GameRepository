@@ -6,6 +6,7 @@ import com.dabe.gamerepository.model.data.enums.DataProvideEnum;
 import com.dabe.gamerepository.model.data.finals.IGConsts;
 import com.dabe.gamerepository.presenter.base.BasePresenter;
 import com.dabe.gamerepository.utils.IGRequestBuilder;
+import com.dabe.gamerepository.utils.SteamRequest;
 import com.dabe.gamerepository.view.interfaces.IAddGameView;
 
 import java.util.HashMap;
@@ -27,7 +28,7 @@ public class AddGamePresenter extends BasePresenter<IAddGameView> {
         setView(view);
     }
 
-    public void loadData(String gameName, DataProvideEnum provider) {
+    public void findGame(String gameName, DataProvideEnum provider) {
         Map<String, String> params = null;
         Subscription sub;
         switch (provider) {
@@ -66,5 +67,29 @@ public class AddGamePresenter extends BasePresenter<IAddGameView> {
                 });
 
         addSubscriber(sub);
+    }
+
+    public void loadUserGame(String steamID) {
+        SteamRequest builder = new SteamRequest.Builder()
+                .steamid(steamID)
+                .build();
+        Subscription sub = dataManager
+                .getUserGameList(builder.getParams(), DataProvideEnum.STEAM)
+                .subscribe(new Subscriber<List<GameBO>>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        getView().showError(e.getMessage());
+                    }
+
+                    @Override
+                    public void onNext(List<GameBO> gamesList) {
+                        getView().onGamesLoaded(gamesList);
+                    }
+                });
     }
 }

@@ -36,6 +36,8 @@ public class GameBO {
     public GameBO(SteamGame steamGame) {
         this.gameId = steamGame.getId();
         this.gameName = steamGame.getName();
+        this.screenURL = steamGame.getImgLogoUrl();
+        this.gameInfo = "";
         this.provider = DataProvideEnum.STEAM;
     }
 
